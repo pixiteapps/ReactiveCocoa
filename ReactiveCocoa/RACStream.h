@@ -168,7 +168,11 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 ///               return value must be an object. This argument cannot be nil.
 ///
 /// Returns a new stream of reduced tuple values.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+// the below should not have void because it can potentially have many arguments
 - (instancetype)reduceEach:(id (^)())reduceBlock;
+#pragma clang diagnostic pop
 
 /// Returns a stream consisting of `value`, followed by the values in the
 /// receiver.
@@ -219,7 +223,7 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 ///
 /// Returns a new stream containing the results from each invocation of
 /// `reduceBlock`.
-+ (instancetype)zip:(id<NSFastEnumeration>)streams reduce:(id (^)())reduceBlock;
++ (instancetype)zip:(id<NSFastEnumeration>)streams reduce:(id (^)(void))reduceBlock;
 
 /// Returns a stream obtained by concatenating `streams` in order.
 + (instancetype)concat:(id<NSFastEnumeration>)streams;

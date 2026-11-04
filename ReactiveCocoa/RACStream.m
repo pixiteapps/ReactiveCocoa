@@ -136,7 +136,7 @@
 	}] setNameWithFormat:@"[%@] -ignore: %@", self.name, [value rac_description]];
 }
 
-- (instancetype)reduceEach:(id (^)())reduceBlock {
+- (instancetype)reduceEach:(id (^)(void))reduceBlock {
 	NSCParameterAssert(reduceBlock != nil);
 
 	__weak RACStream *stream __attribute__((unused)) = self;
